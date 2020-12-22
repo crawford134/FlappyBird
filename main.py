@@ -40,6 +40,15 @@ def drawPipes(pipes):
 		else: 
 			screen.blit(pygame.transform.flip(pipe,False,True),curPipe)
 
+#taking the bird rectangle and checking if it collides
+def checkCollisions(pipes):
+	for curPipe in pipes: 
+		if birdRec.colliderect(curPipe):
+			return True 
+	if birdRec.top <= -100 or birdRec.bottom >= 850: 
+		return True 
+	return False	
+
 #initiates pygame
 pygame.init()
 
@@ -90,6 +99,8 @@ while True:
 	if(birdRec.centery > SCREENHEIGHT):
 		birdRec.centery = SCREENHEIGHT
 	screen.blit(bird,birdRec)	
+	if checkCollisions(pipeList):
+		pipeList.clear()
 
 	#Pipes 
 
